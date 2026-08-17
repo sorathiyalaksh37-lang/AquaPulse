@@ -26,12 +26,12 @@ class CitizenReport(db.Model):
     
     # Status
     status = db.Column(db.String(20), default='submitted')  # submitted, investigating, resolved, closed
-    assigned_to = db.Column(db.Integer, db.ForeignKey('users.id'))
+    assigned_to = db.Column(db.Integer, db.ForeignKey('users.id', name='fk_citizen_report_assigned'))
     priority = db.Column(db.String(20), default='normal')  # low, normal, high, urgent
     
     # Response
     response = db.Column(db.Text)
-    response_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+    response_by = db.Column(db.Integer, db.ForeignKey('users.id', name='fk_citizen_report_response'))
     response_at = db.Column(db.DateTime)
     
     # Timestamps

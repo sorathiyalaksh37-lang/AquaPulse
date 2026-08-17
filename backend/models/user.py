@@ -25,7 +25,7 @@ class User(db.Model):
     last_login = db.Column(db.DateTime)
     
     # Relationships
-    citizen_reports = db.relationship('CitizenReport', backref='user', lazy='dynamic')
+    citizen_reports = db.relationship('CitizenReport', foreign_keys='CitizenReport.user_id', backref='user', lazy='dynamic')
     
     def set_password(self, password):
         """Hash and set password"""

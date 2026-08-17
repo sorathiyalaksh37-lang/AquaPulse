@@ -31,6 +31,9 @@ def create_app(config_name='development'):
     # Load configuration
     app.config.from_object(config[config_name])
     
+    # Ensure JWT secret key is set
+    app.config['JWT_SECRET_KEY'] = app.config.get('JWT_SECRET_KEY', 'dev-jwt-secret-key')
+    
     # Initialize extensions
     db.init_app(app)
     CORS(app, origins=app.config['CORS_ORIGINS'])
@@ -272,5 +275,6 @@ if __name__ == '__main__':
         app,
         debug=(config_name == 'development'),
         host='0.0.0.0',
-        port=5001
+        port=5001,
+        allow_unsafe_werkzeug=True
     )
