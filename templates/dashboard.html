@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPulse - AI Water Quality Monitoring</title>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Floating Particles Background -->
+        <div class="particles" id="particles"></div>
+
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <span class="logo-icon pulse-icon">🌊</span>
+                <span class="logo-text">Aqua<span class="highlight">Pulse</span></span>
+                <span class="badge-feature">⚡ AI-Powered</span>
+            </div>
+            <div class="header-status">
+                <span class="live-indicator">
+                    <span class="live-dot"></span> LIVE
+                </span>
+                <span id="system-status" class="status-badge online">● Online</span>
+                <span id="last-update" class="last-update">Last update: --</span>
+            </div>
+        </header>
+
+        <!-- Features Banner -->
+        <div class="features-banner">
+            <div class="feature-chip">
+                <span class="chip-icon">🔄</span> Real-Time Monitoring
+            </div>
+            <div class="feature-chip">
+                <span class="chip-icon">🧠</span> AI Anomaly Detection
+            </div>
+            <div class="feature-chip">
+                <span class="chip-icon">📊</span> 6 Parameters
+            </div>
+            <div class="feature-chip">
+                <span class="chip-icon">🔔</span> Smart Alerts
+            </div>
+            <div class="feature-chip">
+                <span class="chip-icon">📄</span> Compliance Reports
+            </div>
+            <div class="feature-chip">
+                <span class="chip-icon">📱</span> Citizen Transparency
+            </div>
+        </div>
+
+        <!-- Overall Status Banner -->
+        <div id="overall-status" class="status-banner safe">
+            <div class="status-content">
+                <span class="status-icon">✅</span>
+                <div>
+                    <h2 id="status-title">Water Quality: Safe</h2>
+                    <p id="status-description">All parameters are within safe limits</p>
+                </div>
+                <div class="status-badge-large" id="status-badge-large">SAFE</div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-card animated-card">
+                <div class="stat-label">📊 Readings Today</div>
+                <div class="stat-value" id="readings-count">0</div>
+            </div>
+            <div class="stat-card animated-card">
+                <div class="stat-label">🔔 Active Alerts</div>
+                <div class="stat-value" id="active-alerts">0</div>
+            </div>
+            <div class="stat-card animated-card">
+                <div class="stat-label">📈 Compliance Score</div>
+                <div class="stat-value" id="compliance-score">100%</div>
+            </div>
+            <div class="stat-card animated-card">
+                <div class="stat-label">🕐 Last Event</div>
+                <div class="stat-value" id="last-event">--</div>
+            </div>
+        </div>
+
+        <!-- Parameter Cards -->
+        <div class="parameters-grid" id="parameters-grid">
+            <!-- Will be populated by JavaScript -->
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+            <div class="chart-card animated-card">
+                <h3>📉 Real-Time Water Quality Trends</h3>
+                <div id="quality-chart"></div>
+            </div>
+            <div class="chart-card animated-card">
+                <h3>📊 Parameter Distribution</h3>
+                <div id="distribution-chart"></div>
+            </div>
+        </div>
+
+        <!-- Alert Log -->
+        <div class="alert-section animated-card">
+            <h3>🔔 Recent Alerts</h3>
+            <div id="alert-log" class="alert-log">
+                <div class="alert-log-empty">✅ No alerts detected</div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn btn-primary pulse-btn" onclick="generateReport()">
+                📄 Generate Compliance Report
+            </button>
+            <button class="btn btn-secondary" onclick="clearAlerts()">
+                ✓ Clear Alerts
+            </button>
+            <button class="btn btn-success" onclick="simulateContamination()">
+                ⚠️ Simulate Contamination
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <span>🌊 AquaPulse v1.0 • AI-Powered Water Quality Intelligence</span>
+            <span>CPCB-Aligned • Real-Time • Transparent</span>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
